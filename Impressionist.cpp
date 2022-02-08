@@ -48,3 +48,6 @@ int irand(int max)
 {
 	return rand()%max;
 }
+
+
+//////testsdasd
