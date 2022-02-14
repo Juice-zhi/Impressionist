@@ -1,4 +1,4 @@
-//
+//guozhishishabi
 // bitmap.cpp
 //
 // handle MS bitmap I/O. For portability, we don't use the data structure 
