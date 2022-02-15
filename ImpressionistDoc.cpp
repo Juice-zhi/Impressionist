@@ -163,7 +163,7 @@ int ImpressionistDoc::clearCanvas()
 	{
 		delete [] m_ucPainting;
 
-		// allocate space for draw view
+		//// allocate space for draw view
 		m_ucPainting	= new unsigned char [m_nPaintWidth*m_nPaintHeight*3];
 		memset(m_ucPainting, 0, m_nPaintWidth*m_nPaintHeight*3);
 
