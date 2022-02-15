@@ -1,0 +1,71 @@
+//-----------------------------
+//Goal
+//-----------------------------
+1.Implement 5 different brush types: single line, scattered lines, scattered points, (filled) circles, and scattered (filled) circles.
+  See the sample solution for an example of each brush's appearance.
+  Note that scattered brushes should sample from each location they color individually, not just use a single color for each splotch.
+2.Add sliders to control various brush attributes. You need to include sliders for the line thickness and brush angle, in addition to the existing brush size slider.
+3.Add the ability to control the brush direction.
+  The stroke direction should be controlled four different ways: using a slider value, 
+																 using the right mouse button to drag out a direction line,
+																 using the direction of the cursor movement,
+																 and using directions that are perpendicular to the gradient of the image.
+  You can use a radio box to allow the user to select which method to use.
+4.Allow the user to change the opacity (alpha value) of the brush stroke. An alpha value slider should be added to the controls window.
+
+
+//-----------------------------
+//Structure
+//-----------------------------
+ImpressionistUI -- 这是为 Impressionist 项目定义用户界面的地方。在此处将新小部件添加到您的 UI。
+ImpressionistDoc -- 这基本上维护了用于回答画笔颜色查询的位图。它还充当画笔和 UI（包括视图）之间的桥梁。
+	ImpBrush -- 这是每个画笔的基类。它定义了画笔应具有的功能。你的新画笔应该继承自这个类。您的画笔所使用的颜色也在此处设置。
+		PointBrush——这是Point Brush的实现。它是一种 ImpBrush。您的所有画笔实现都将与不同的 GL 原语调用类似。
+PaintView——维护输入图像的绘制视图并处理与绘制视图相关的事件。在此处为绘制的图像添加新事件和更改。
+OriginalView——维护输入图像的原始视图。在此处添加对原始图像的更改。
+
+
+//-----------------------------
+//FAQ
+//-----------------------------
+Is there a way to catch OpenGL errors?
+Yes.
+When it seems like nothing is happening, OpenGL is often returning an error message. To check for this, use the following code:
+GLenum error_flag;
+error_flag = glGetError();
+if(error_flag != GL_NO_ERROR){
+	printf("Error: %1s (%i) in %1s.\n",gluErrorString(error_flag),error_flag,"method name");
+}
+
+
+//-----------------------------
+//Grayscale
+//-----------------------------
+grayscale=0.299R+0.587G+0.114B
+
+
+//-----------------------------
+//Bells & Whistles
+//-----------------------------
+1W per new brush										yes/no
+1W border clipping										yes/no
+1W (red) marker											yes/no
+1W swap													yes/no
+1B RGB scale											yes/no
+1B blur/sharp brush										yes/no
+1B 1 level undo											yes/no
+1B dissolve												yes/no 
+BW fade in/out input on output canvas					yes/no
+BW mural (blending)										yes/no
+BW alpha brush											yes/no
+BW automatic paint whole image							yes/no
+BW gradient from user-specified image					yes/no
+BW edge clipping										yes/no
+2B user-specified kernel								yes/no
+2B edge detection + user-specified edge clipping		yes/no
+2B multiresolution										yes/no
+2B warp brush											yes/no
+2B curved brush following image gradient				yes/no
+4B mosaic												yes/no
+4B impressionist video with temporal coherency			yes/no
+8B Bayesian matting										yes/no
