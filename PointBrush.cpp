@@ -45,14 +45,6 @@ void PointBrush::BrushMove( const Point source, const Point target )
 
 		glVertex2d( target.x, target.y );
 	glEnd();
-
-
-	//glBegin( GL_LINES );
-		//SetColor( source );
-
-		//glVertex2d(target.x - 10, target.y);
-		//glVertex2d(target.x + 10, target.y);
-	//glEnd();
 }
 
 void PointBrush::BrushEnd( const Point source, const Point target )

@@ -42,27 +42,12 @@ void LineBrush::BrushMove(const Point source, const Point target)
 		return;
 	}
 
-	//glBegin(GL_POINTS);
-	//SetColor(source);
-
-	//glVertex2d(target.x, target.y);
-	//glEnd();
-
-
 	glBegin(GL_LINES);
-	SetColor(source);
+		SetColor(source);
 
-	glVertex2d(target.x - size, target.y);
-	glVertex2d(target.x + size, target.y);
+		glVertex2d(target.x - size / 2, target.y);
+		glVertex2d(target.x + size / 2, target.y);
 	glEnd();
-
-	//glBegin(GL_LINES);
-	//SetColor(source);
-	//for (int i = 0;i < 1000;i++) {
-		//glVertex2d(target.x + (size / 2) * cos(2 * M_PI * i / 1000.0), target.y + (size / 2) * sin(2 * M_PI * i / 1000.0));
-		//glVertex2d(target.x - (size / 2) * cos(2 * M_PI * i / 1000.0), target.y - (size / 2) * sin(2 * M_PI * i / 1000.0));
-	//}
-	//glEnd();
 }
 
 void LineBrush::BrushEnd(const Point source, const Point target)
