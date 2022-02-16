@@ -44,13 +44,11 @@ void ScatteredPointBrush::BrushMove(const Point source, const Point target)
 
 	int size = pDoc->getSize();
 
-	int minNum = (int)floor(size * size / 7)
-	int
+	int minNum = (int)floor(size * size / 7);
 	int maxNum = (int)ceil(size * size / 5);
 
 	srand((unsigned)time(NULL) + source.x * source.y);
 	int num = (rand() % (maxNum - minNum + 1)) + minNum;
-	//OutputDebugStringA("test");
 
 	glBegin(GL_POINTS);
 		for (int i = 0; i < num; ++i) {
