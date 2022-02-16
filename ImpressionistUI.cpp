@@ -474,18 +474,34 @@ ImpressionistUI::ImpressionistUI() {
 		m_ThicknessSlider->align(FL_ALIGN_RIGHT);
 		m_ThicknessSlider->callback(cb_thicknessSlides);
 		// Add angle slider
-		m_ThicknessSlider = new Fl_Value_Slider(10, 110, 300, 20, "Line Angle");
-		m_ThicknessSlider->user_data((void*)(this));	// record self to be used by static callback functions
-		m_ThicknessSlider->type(FL_HOR_NICE_SLIDER);
-		m_ThicknessSlider->labelfont(FL_COURIER);
-		m_ThicknessSlider->labelsize(12);
-		m_ThicknessSlider->minimum(0);
-		m_ThicknessSlider->maximum(359);
-		m_ThicknessSlider->step(1);
-		m_ThicknessSlider->value(angle);
-		m_ThicknessSlider->align(FL_ALIGN_RIGHT);
-		m_ThicknessSlider->callback(cb_angleSlides);
+		m_AngleSlider = new Fl_Value_Slider(10, 110, 300, 20, "Line Angle");
+		m_AngleSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_AngleSlider->type(FL_HOR_NICE_SLIDER);
+		m_AngleSlider->labelfont(FL_COURIER);
+		m_AngleSlider->labelsize(12);
+		m_AngleSlider->minimum(0);
+		m_AngleSlider->maximum(359);
+		m_AngleSlider->step(1);
+		m_AngleSlider->value(angle);
+		m_AngleSlider->align(FL_ALIGN_RIGHT);
+		m_AngleSlider->callback(cb_angleSlides);
 
     m_brushDialog->end();	
 
+}
+//deactivate thickness slider
+void ImpressionistUI::deactivate_thickness_slider() {
+	m_ThicknessSlider->deactivate();
+}
+//deactivate angle slider
+void ImpressionistUI::deactivate_angle_slider() {
+	m_AngleSlider->deactivate();
+}
+//activate thickness slider
+void ImpressionistUI::activate_thickness_slider() {
+	m_ThicknessSlider->activate();
+}
+//activate angle slider
+void ImpressionistUI::activate_angle_slider() {
+	m_AngleSlider->activate();
 }

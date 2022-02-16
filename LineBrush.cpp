@@ -30,6 +30,8 @@ void LineBrush::BrushBegin(const Point source, const Point target)
 	glPointSize((float)size);
 	glLineWidth(thickness);
 	BrushMove(source, target);
+
+	
 }
 
 void LineBrush::BrushMove(const Point source, const Point target)

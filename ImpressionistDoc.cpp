@@ -45,7 +45,7 @@ ImpressionistDoc::ImpressionistDoc()
 	ImpBrush::c_pBrushes[BRUSH_CIRCLES]				
 		= new CircleBrush( this, "Circles" );
 	ImpBrush::c_pBrushes[BRUSH_SCATTERED_POINTS]	
-		= new PointBrush( this, "Scattered Points" );
+		= new ScatteredPointBrush( this, "Scattered Points" );
 	ImpBrush::c_pBrushes[BRUSH_SCATTERED_LINES]		
 		= new PointBrush( this, "Scattered Lines" );
 	ImpBrush::c_pBrushes[BRUSH_SCATTERED_CIRCLES]	
@@ -63,6 +63,8 @@ ImpressionistDoc::ImpressionistDoc()
 void ImpressionistDoc::setUI(ImpressionistUI* ui) 
 {
 	m_pUI	= ui;
+	m_pUI->deactivate_thickness_slider();
+	m_pUI->deactivate_angle_slider();
 }
 
 //---------------------------------------------------------
@@ -80,6 +82,14 @@ char* ImpressionistDoc::getImageName()
 void ImpressionistDoc::setBrushType(int type)
 {
 	m_pCurrentBrush	= ImpBrush::c_pBrushes[type];
+	if (type != 1) {
+		m_pUI->deactivate_thickness_slider();
+		m_pUI->deactivate_angle_slider();
+	}
+	else {
+		m_pUI->activate_thickness_slider();
+		m_pUI->activate_angle_slider();
+	}
 }
 
 //---------------------------------------------------------
@@ -214,3 +224,19 @@ GLubyte* ImpressionistDoc::GetOriginalPixel( const Point p )
 	return GetOriginalPixel( p.x, p.y );
 }
 
+//deactivate thickness slider
+void ImpressionistDoc::deactivate_thickness_slider() {
+	m_pUI->deactivate_thickness_slider();
+}
+//deactivate angle slider
+void ImpressionistDoc::deactivate_angle_slider() {
+	m_pUI->deactivate_angle_slider();
+}
+//activate thickness slider
+void ImpressionistDoc::activate_thickness_slider() {
+	m_pUI->activate_thickness_slider();
+}
+//activate angle slider
+void ImpressionistDoc::activate_angle_slider() {
+	m_pUI->activate_angle_slider();
+}

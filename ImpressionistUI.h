@@ -86,6 +86,12 @@ private:
 	static void	cb_sizeSlides(Fl_Widget* o, void* v);
 	static void cb_thicknessSlides(Fl_Widget* o, void* v);
 	static void cb_angleSlides(Fl_Widget* o, void* v);
+	
+public:
+	void deactivate_thickness_slider();
+	void deactivate_angle_slider();
+	void activate_thickness_slider();
+	void activate_angle_slider();
 };
 
 #endif

@@ -33,6 +33,10 @@ public:
 	void	setAngle(int line_angle);
 	char*	getImageName();					// get the current image name
 	
+	void deactivate_thickness_slider();
+	void deactivate_angle_slider();
+	void activate_thickness_slider();
+	void activate_angle_slider();
 
 // Attributes
 public:
