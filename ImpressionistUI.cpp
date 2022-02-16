@@ -293,6 +293,10 @@ void ImpressionistUI::cb_thicknessSlides(Fl_Widget* o, void* v) {
 void ImpressionistUI::cb_angleSlides(Fl_Widget* o, void* v) {
 	((ImpressionistUI*)(o->user_data()))->angle = int(((Fl_Slider*)o)->value());
 }
+//update alpha value
+void ImpressionistUI::cb_alphaSlides(Fl_Widget* o, void* v) {
+	((ImpressionistUI*)(o->user_data()))->alpha_value = int(((Fl_Slider*)o)->value());
+}
 
 //---------------------------------- per instance functions --------------------------------------
 
@@ -440,7 +444,7 @@ ImpressionistUI::ImpressionistUI() {
 	m_nSize = 10;
 	thickness = 1;
 	angle = 0;
-
+	alpha_value = 1;
 	// brush dialog definition
 	m_brushDialog = new Fl_Window(400, 325, "Brush Dialog");
 		// Add a brush type choice to the dialog
@@ -490,6 +494,18 @@ ImpressionistUI::ImpressionistUI() {
 		m_AngleSlider->value(angle);
 		m_AngleSlider->align(FL_ALIGN_RIGHT);
 		m_AngleSlider->callback(cb_angleSlides);
+		//Add alpha value slider
+		m_AlphaSlider = new Fl_Value_Slider(10, 140, 300, 20, "Alpha");
+		m_AlphaSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_AlphaSlider->type(FL_HOR_NICE_SLIDER);
+		m_AlphaSlider->labelfont(FL_COURIER);
+		m_AlphaSlider->labelsize(12);
+		m_AlphaSlider->minimum(0.00);
+		m_AlphaSlider->maximum(1.00);
+		m_AlphaSlider->step(0.01);
+		m_AlphaSlider->value(alpha_value);
+		m_AlphaSlider->align(FL_ALIGN_RIGHT);
+		m_AlphaSlider->callback(cb_alphaSlides);
 
     m_brushDialog->end();	
 

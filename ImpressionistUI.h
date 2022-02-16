@@ -40,6 +40,7 @@ public:
 	Fl_Slider*			m_BrushSizeSlider;
 	Fl_Slider*			m_ThicknessSlider;
 	Fl_Slider*			m_AngleSlider;
+	Fl_Slider*			m_AlphaSlider;
 
 	Fl_Button*          m_ClearCanvasButton;
 
@@ -66,7 +67,7 @@ private:
 	int		m_nSize;
 	int		thickness;
 	int		angle;
-
+	int     alpha_value;
 	// Static class members
 	static Fl_Menu_Item		menuitems[];
 	static Fl_Menu_Item		brushTypeMenu[NUM_BRUSH_TYPE+1];
@@ -86,6 +87,7 @@ private:
 	static void	cb_sizeSlides(Fl_Widget* o, void* v);
 	static void cb_thicknessSlides(Fl_Widget* o, void* v);
 	static void cb_angleSlides(Fl_Widget* o, void* v);
+	static void cb_alphaSlides(Fl_Widget* o, void* v);
 	
 public:
 	void deactivate_thickness_slider();
