@@ -279,12 +279,17 @@ void ImpressionistUI::cb_sizeSlides(Fl_Widget* o, void* v)
 {
 	((ImpressionistUI*)(o->user_data()))->m_nSize=int( ((Fl_Slider *)o)->value() ) ;
 }
+
+//--------------------------------------------------------
 //update thickness
+//--------------------------------------------------------
 void ImpressionistUI::cb_thicknessSlides(Fl_Widget* o, void* v) {
 	((ImpressionistUI*)(o->user_data()))->thickness = int(((Fl_Slider*)o)->value());
 }
 
+//--------------------------------------------------------
 //update angle
+//--------------------------------------------------------
 void ImpressionistUI::cb_angleSlides(Fl_Widget* o, void* v) {
 	((ImpressionistUI*)(o->user_data()))->angle = int(((Fl_Slider*)o)->value());
 }
