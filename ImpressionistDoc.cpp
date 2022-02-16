@@ -90,6 +90,15 @@ int ImpressionistDoc::getSize()
 	return m_pUI->getSize();
 }
 
+// Return the thickness of the brush.
+int ImpressionistDoc::getThickness() {
+	return m_pUI->getThickness();
+}
+//Return the Angle of the brush.
+int ImpressionistDoc::getAngle() {
+	return m_pUI->getAngle();
+}
+
 //---------------------------------------------------------
 // Load the specified image
 // This is called by the UI when the load image button is 

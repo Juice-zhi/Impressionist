@@ -279,6 +279,15 @@ void ImpressionistUI::cb_sizeSlides(Fl_Widget* o, void* v)
 {
 	((ImpressionistUI*)(o->user_data()))->m_nSize=int( ((Fl_Slider *)o)->value() ) ;
 }
+//update thickness
+void ImpressionistUI::cb_thicknessSlides(Fl_Widget* o, void* v) {
+	((ImpressionistUI*)(o->user_data()))->thickness = int(((Fl_Slider*)o)->value());
+}
+
+//update angle
+void ImpressionistUI::cb_angleSlides(Fl_Widget* o, void* v) {
+	((ImpressionistUI*)(o->user_data()))->angle = int(((Fl_Slider*)o)->value());
+}
 
 //---------------------------------- per instance functions --------------------------------------
 
@@ -337,6 +346,28 @@ void ImpressionistUI::setSize( int size )
 
 	if (size<=40) 
 		m_BrushSizeSlider->value(m_nSize);
+}
+// Get the thickness
+int ImpressionistUI::getThickness() {
+	return thickness;
+}
+// Set the thickness
+void ImpressionistUI::setThickness(int line_thickness) {
+	thickness = line_thickness;
+
+	if (line_thickness <= 40)
+		m_ThicknessSlider->value(thickness);
+}
+// Get the Angle
+int ImpressionistUI::getAngle() {
+	return angle;
+}
+// Set the Angle
+void ImpressionistUI::setAngle(int line_angle) {
+	angle = line_angle;
+
+	if (line_angle <= 359)
+		m_AngleSlider->value(angle);
 }
 
 // Main menu definition
@@ -402,6 +433,8 @@ ImpressionistUI::ImpressionistUI() {
 	// init values
 
 	m_nSize = 10;
+	thickness = 1;
+	angle = 0;
 
 	// brush dialog definition
 	m_brushDialog = new Fl_Window(400, 325, "Brush Dialog");
@@ -417,7 +450,7 @@ ImpressionistUI::ImpressionistUI() {
 
 
 		// Add brush size slider to the dialog 
-		m_BrushSizeSlider = new Fl_Value_Slider(10, 80, 300, 20, "Size");
+		m_BrushSizeSlider = new Fl_Value_Slider(10, 50, 300, 20, "Size");
 		m_BrushSizeSlider->user_data((void*)(this));	// record self to be used by static callback functions
 		m_BrushSizeSlider->type(FL_HOR_NICE_SLIDER);
         m_BrushSizeSlider->labelfont(FL_COURIER);
@@ -428,6 +461,30 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushSizeSlider->value(m_nSize);
 		m_BrushSizeSlider->align(FL_ALIGN_RIGHT);
 		m_BrushSizeSlider->callback(cb_sizeSlides);
+		// Add thickness slider
+		m_ThicknessSlider = new Fl_Value_Slider(10, 80, 300, 20, "Line Width");
+		m_ThicknessSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_ThicknessSlider->type(FL_HOR_NICE_SLIDER);
+		m_ThicknessSlider->labelfont(FL_COURIER);
+		m_ThicknessSlider->labelsize(12);
+		m_ThicknessSlider->minimum(1);
+		m_ThicknessSlider->maximum(40);
+		m_ThicknessSlider->step(1);
+		m_ThicknessSlider->value(thickness);
+		m_ThicknessSlider->align(FL_ALIGN_RIGHT);
+		m_ThicknessSlider->callback(cb_thicknessSlides);
+		// Add angle slider
+		m_ThicknessSlider = new Fl_Value_Slider(10, 110, 300, 20, "Line Angle");
+		m_ThicknessSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_ThicknessSlider->type(FL_HOR_NICE_SLIDER);
+		m_ThicknessSlider->labelfont(FL_COURIER);
+		m_ThicknessSlider->labelsize(12);
+		m_ThicknessSlider->minimum(0);
+		m_ThicknessSlider->maximum(359);
+		m_ThicknessSlider->step(1);
+		m_ThicknessSlider->value(angle);
+		m_ThicknessSlider->align(FL_ALIGN_RIGHT);
+		m_ThicknessSlider->callback(cb_angleSlides);
 
     m_brushDialog->end();	
 
