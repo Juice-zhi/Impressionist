@@ -28,16 +28,15 @@ void LineBrush::BrushBegin(const Point source, const Point target)
 
 
 	glPointSize((float)size);
-	glLineWidth(thickness);
+	glLineWidth((float)thickness);
 	BrushMove(source, target);
-
-	
 }
 
 void LineBrush::BrushMove(const Point source, const Point target)
 {
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg = pDoc->m_pUI;
+
 	int size = pDoc->getSize();
 	int thickness = pDoc->getThickness();
 	int angle = pDoc->getAngle();
@@ -49,8 +48,8 @@ void LineBrush::BrushMove(const Point source, const Point target)
 
 	glBegin(GL_LINES);
 		SetColor(source);
-		glVertex2d(target.x - ((size / 2)*cos(angle*M_PI/180)), target.y-(size/2)*sin(angle*M_PI/180));
-		glVertex2d(target.x + ((size / 2)*cos(angle*M_PI/180)), target.y+(size/2)*sin(angle*M_PI/180));
+		glVertex2d(target.x - ((size / 2) * cos(angle * M_PI / 180)), target.y - (size / 2) * sin(angle * M_PI / 180));
+		glVertex2d(target.x + ((size / 2) * cos(angle * M_PI / 180)), target.y + (size / 2) * sin(angle * M_PI / 180));
 	glEnd();
 }
 

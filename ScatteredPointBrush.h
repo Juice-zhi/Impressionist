@@ -1,7 +1,7 @@
 //
 // ScatteredPointBrush.h
 //
-// The header file for Point Brush. 
+// The header file for Scattered Point Brush. 
 //
 
 #ifndef SCATTEREDPOINTBRUSH_H

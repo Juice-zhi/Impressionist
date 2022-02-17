@@ -8,14 +8,10 @@
 #include "impressionistUI.h"
 #include "ScatteredPointBrush.h"
 #include <math.h>
-#include <stdlib.h>
-#include <map>
-#include <profileapi.h>
-#include <iostream>
+#include <time.h>
 
 
 extern float frand();
-extern int irand();
 
 ScatteredPointBrush::ScatteredPointBrush(ImpressionistDoc* pDoc, char* name) :
 	ImpBrush(pDoc, name)
