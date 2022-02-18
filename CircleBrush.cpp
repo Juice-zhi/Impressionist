@@ -22,11 +22,6 @@ void CircleBrush::BrushBegin(const Point source, const Point target)
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg = pDoc->m_pUI;
 
-	int size = pDoc->getSize();
-
-
-
-	glPointSize((float)size);
 
 	BrushMove(source, target);
 }
@@ -35,12 +30,13 @@ void CircleBrush::BrushMove(const Point source, const Point target)
 {
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg = pDoc->m_pUI;
-	int size = pDoc->getSize();
 
 	if (pDoc == NULL) {
 		printf("CircleBrush::BrushMove  document is NULL\n");
 		return;
 	}
+
+	int size = pDoc->getSize();
 
 	glBegin(GL_LINES);
 		SetColor(source);
