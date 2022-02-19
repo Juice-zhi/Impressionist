@@ -39,6 +39,7 @@ void PointBrush::BrushMove( const Point source, const Point target )
 		return;
 	}
 
+	//int alpha = pDoc->
 	glBegin( GL_POINTS );
 		SetColor( source );
 
