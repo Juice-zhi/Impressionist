@@ -236,6 +236,32 @@ GLubyte* ImpressionistDoc::GetOriginalPixel( const Point p )
 	return GetOriginalPixel( p.x, p.y );
 }
 
+//------------------------------------------------------------------
+// Get the color of the pixel in the paint image at coord x and y
+//------------------------------------------------------------------
+GLubyte* ImpressionistDoc::GetOriginalPixel(int x, int y)
+{
+	if (x < 0)
+		x = 0;
+	else if (x >= m_nWidth)
+		x = m_nWidth - 1;
+
+	if (y < 0)
+		y = 0;
+	else if (y >= m_nHeight)
+		y = m_nHeight - 1;
+
+	return (GLubyte*)(m_ucBitmap + 3 * (y * m_nWidth + x));
+}
+
+//----------------------------------------------------------------
+// Get the color of the pixel in the original image at point p
+//----------------------------------------------------------------
+GLubyte* ImpressionistDoc::GetOriginalPixel(const Point p)
+{
+	return GetOriginalPixel(p.x, p.y);
+}
+
 //deactivate thickness slider
 void ImpressionistDoc::deactivate_thickness_slider() {
 	m_pUI->deactivate_thickness_slider();
