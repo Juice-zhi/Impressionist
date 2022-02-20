@@ -43,6 +43,7 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 	int size = pDoc->getSize();
 	int minNum = size > 14 ? 3 : (size > 4 ? 2 : 1); ///1-4:1 5-14:2 15-40:3
 	int maxNum = min(size,4);
+	int angle = pDoc->getAngle();
 
 	srand((unsigned)time(NULL) + source.x * source.y);
 	int num = (rand() % (maxNum - minNum + 1)) + minNum;
@@ -55,8 +56,8 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 			int pos2 = rand() % (size - pos1 - size * 2 / 3) + pos1 + size * 2 / 3;
 			currentY -= rand() % (currentY - num + i) + 1;
 			SetColor(Point(source.x + (pos1 + pos2) / 2 - size / 2, source.y + currentY));
-			glVertex2d(target.x + pos1 - size / 2, target.y + currentY);
-			glVertex2d(target.x + pos2 - size / 2, target.y + currentY);
+			glVertex2d(target.x + pos1 - (size / 2)* cos(angle * M_PI / 180), target.y - currentY* sin(angle * M_PI / 180));
+			glVertex2d(target.x + pos2 - (size / 2)* cos(angle * M_PI / 180), target.y + currentY* sin(angle * M_PI / 180));
 		}
 	glEnd();
 }

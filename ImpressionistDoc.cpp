@@ -82,7 +82,7 @@ char* ImpressionistDoc::getImageName()
 void ImpressionistDoc::setBrushType(int type)
 {
 	m_pCurrentBrush	= ImpBrush::c_pBrushes[type];
-	if (type != 1) {
+	if (type != 1 && type !=4) {
 		m_pUI->deactivate_thickness_slider();
 		m_pUI->deactivate_angle_slider();
 	}
