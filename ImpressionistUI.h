@@ -36,6 +36,7 @@ public:
 // for brush dialog
 	Fl_Window*			m_brushDialog;
 	Fl_Choice*			m_BrushTypeChoice;
+	Fl_Choice*			m_StrokeDirectionChoice;
 
 	Fl_Slider*			m_BrushSizeSlider;
 	Fl_Slider*			m_ThicknessSlider;
@@ -73,6 +74,7 @@ private:
 	// Static class members
 	static Fl_Menu_Item		menuitems[];
 	static Fl_Menu_Item		brushTypeMenu[NUM_BRUSH_TYPE+1];
+	static Fl_Menu_Item		directionTypeMenu[NUM_DIRECTION_TYPE + 1];
 
 	static ImpressionistUI*	whoami(Fl_Menu_* o);
 
@@ -90,6 +92,7 @@ private:
 	static void cb_thicknessSlides(Fl_Widget* o, void* v);
 	static void cb_angleSlides(Fl_Widget* o, void* v);
 	static void cb_alphaSlides(Fl_Widget* o, void* v);
+	static void cb_directionChoice(Fl_Widget*o,void* v);
 	
 public:
 	void deactivate_thickness_slider();

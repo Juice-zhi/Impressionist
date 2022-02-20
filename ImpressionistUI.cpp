@@ -257,6 +257,16 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 
 	pDoc->setBrushType(type);
 }
+// Called by the UI when stroke direction is changed
+void ImpressionistUI::cb_directionChoice(Fl_Widget* o, void* v)
+{
+	ImpressionistUI* pUI = ((ImpressionistUI*)(o->user_data()));
+	ImpressionistDoc* pDoc = pUI->getDocument();
+
+	int type = (int)v;
+
+	//pDoc->setdirectionType(type);
+}
 
 //------------------------------------------------------------
 // Clears the paintview canvas.
@@ -440,7 +450,13 @@ Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
   {"Scattered Circles",	FL_ALT+'d', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_CIRCLES},
   {0}
 };
-
+//Direction choice menu definition
+Fl_Menu_Item ImpressionistUI::directionTypeMenu[NUM_DIRECTION_TYPE + 1] = {
+	{"Slider/Right Mouse",	FL_ALT+'s',(Fl_Callback*)ImpressionistUI::cb_directionChoice, (void*)SLIDER_OR_RIGHT_MOUSE},
+	{"Gradient",			FL_ALT+'g',(Fl_Callback*)ImpressionistUI::cb_directionChoice, (void*)GRADIENT},
+	{"Brush Direction",		FL_ALT+'b',(Fl_Callback*)ImpressionistUI::cb_directionChoice, (void*)BRUSH_DIRECTION},
+	{0}
+};
 
 
 //----------------------------------------------------
@@ -486,13 +502,20 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushTypeChoice->menu(brushTypeMenu);
 		m_BrushTypeChoice->callback(cb_brushChoice);
 
+		// Add a direction type choice to the dialog
+		m_StrokeDirectionChoice = new Fl_Choice(110, 50, 150, 25, "&Stroke Direction");
+		m_StrokeDirectionChoice->user_data((void*)(this));	// record self to be used by static callback functions
+		m_StrokeDirectionChoice->menu(directionTypeMenu);
+		m_StrokeDirectionChoice->callback(cb_directionChoice);
+
+		//clear button
 		m_ClearCanvasButton = new Fl_Button(240,10,150,25,"&Clear Canvas");
 		m_ClearCanvasButton->user_data((void*)(this));
 		m_ClearCanvasButton->callback(cb_clear_canvas_button);
 
 
 		// Add brush size slider to the dialog 
-		m_BrushSizeSlider = new Fl_Value_Slider(10, 50, 300, 20, "Size");
+		m_BrushSizeSlider = new Fl_Value_Slider(10, 80, 300, 20, "Size");
 		m_BrushSizeSlider->user_data((void*)(this));	// record self to be used by static callback functions
 		m_BrushSizeSlider->type(FL_HOR_NICE_SLIDER);
         m_BrushSizeSlider->labelfont(FL_COURIER);
@@ -504,7 +527,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushSizeSlider->align(FL_ALIGN_RIGHT);
 		m_BrushSizeSlider->callback(cb_sizeSlides);
 		// Add thickness slider
-		m_ThicknessSlider = new Fl_Value_Slider(10, 80, 300, 20, "Line Width");
+		m_ThicknessSlider = new Fl_Value_Slider(10, 110, 300, 20, "Line Width");
 		m_ThicknessSlider->user_data((void*)(this));	// record self to be used by static callback functions
 		m_ThicknessSlider->type(FL_HOR_NICE_SLIDER);
 		m_ThicknessSlider->labelfont(FL_COURIER);
@@ -516,7 +539,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_ThicknessSlider->align(FL_ALIGN_RIGHT);
 		m_ThicknessSlider->callback(cb_thicknessSlides);
 		// Add angle slider
-		m_AngleSlider = new Fl_Value_Slider(10, 110, 300, 20, "Line Angle");
+		m_AngleSlider = new Fl_Value_Slider(10, 140, 300, 20, "Line Angle");
 		m_AngleSlider->user_data((void*)(this));	// record self to be used by static callback functions
 		m_AngleSlider->type(FL_HOR_NICE_SLIDER);
 		m_AngleSlider->labelfont(FL_COURIER);
@@ -528,7 +551,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_AngleSlider->align(FL_ALIGN_RIGHT);
 		m_AngleSlider->callback(cb_angleSlides);
 		//Add alpha value slider
-		m_AlphaSlider = new Fl_Value_Slider(10, 140, 300, 20, "Alpha");
+		m_AlphaSlider = new Fl_Value_Slider(10, 170, 300, 20, "Alpha");
 		m_AlphaSlider->user_data((void*)(this));	// record self to be used by static callback functions
 		m_AlphaSlider->type(FL_HOR_NICE_SLIDER);
 		m_AlphaSlider->labelfont(FL_COURIER);
