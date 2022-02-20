@@ -39,7 +39,7 @@ void CircleBrush::BrushMove(const Point source, const Point target)
 	int size = pDoc->getSize();
 
 	glBegin(GL_LINES);
-		SetColor(source);
+		SetColor(source, target);
 
 		for (int i = 0;i < 1000;i++) {
 			glVertex2d(target.x+(size/2)*cos(2 * M_PI * i / 1000.0), target.y+(size/2)*sin(2 * M_PI * i / 1000.0));

@@ -44,7 +44,7 @@ void LineBrush::BrushMove(const Point source, const Point target)
 	}
 
 	glBegin(GL_LINES);
-		SetColor(source);
+		SetColor(source, target);
 		glVertex2d(target.x - ((size / 2) * cos(angle * M_PI / 180)), target.y - (size / 2) * sin(angle * M_PI / 180));
 		glVertex2d(target.x + ((size / 2) * cos(angle * M_PI / 180)), target.y + (size / 2) * sin(angle * M_PI / 180));
 	glEnd();

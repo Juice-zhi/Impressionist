@@ -55,7 +55,7 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 			int pos1 = rand() % (min(size / 3 , 5));
 			int pos2 = rand() % (size - pos1 - size * 2 / 3) + pos1 + size * 2 / 3;
 			currentY -= rand() % (currentY - num + i) + 1;
-			SetColor(Point(source.x + (pos1 + pos2) / 2 - size / 2, source.y + currentY));
+			SetColor(Point(source.x + (pos1 + pos2) / 2 - size / 2, source.y + currentY), Point(target.x + (pos1 + pos2) / 2 - size / 2, target.y + currentY));
 			glVertex2d(target.x + pos1 - (size / 2)* cos(angle * M_PI / 180), target.y - currentY* sin(angle * M_PI / 180));
 			glVertex2d(target.x + pos2 - (size / 2)* cos(angle * M_PI / 180), target.y + currentY* sin(angle * M_PI / 180));
 		}

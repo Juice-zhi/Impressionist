@@ -51,7 +51,7 @@ void ScatteredCircleBrush::BrushMove(const Point source, const Point target)
 			y *= -1;
 		}
 
-		SetColor(Point(source.x + x, source.y + y));
+		SetColor(Point(source.x + x, source.y + y), Point(target.x + x, target.y + y));
 
 		for (int i = 0; i < 1000; i++) {
 			glVertex2d(target.x + x + (size / 2) * cos(2 * M_PI * i / 1000.0), target.y + y + (size / 2) * sin(2 * M_PI * i / 1000.0));
