@@ -31,6 +31,8 @@ public:
 	void	setThickness(int line_thickness);
 	int		getAngle();
 	void	setAngle(int line_angle);
+	float	getAlpha();
+	void	setAlpha(float alpha_value);
 	char*	getImageName();					// get the current image name
 	
 	void deactivate_thickness_slider();

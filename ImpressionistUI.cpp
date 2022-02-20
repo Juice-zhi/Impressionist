@@ -293,9 +293,12 @@ void ImpressionistUI::cb_thicknessSlides(Fl_Widget* o, void* v) {
 void ImpressionistUI::cb_angleSlides(Fl_Widget* o, void* v) {
 	((ImpressionistUI*)(o->user_data()))->angle = int(((Fl_Slider*)o)->value());
 }
+
+//--------------------------------------------------------
 //update alpha value
+//--------------------------------------------------------
 void ImpressionistUI::cb_alphaSlides(Fl_Widget* o, void* v) {
-	((ImpressionistUI*)(o->user_data()))->alpha_value = int(((Fl_Slider*)o)->value());
+	((ImpressionistUI*)(o->user_data()))->alpha = float(((Fl_Slider*)o)->value());
 }
 
 //---------------------------------- per instance functions --------------------------------------
@@ -356,27 +359,57 @@ void ImpressionistUI::setSize( int size )
 	if (size<=40) 
 		m_BrushSizeSlider->value(m_nSize);
 }
-// Get the thickness
+
+//-------------------------------------------------
+// Get the brush thickness
+//-------------------------------------------------
 int ImpressionistUI::getThickness() {
 	return thickness;
 }
-// Set the thickness
+
+//-------------------------------------------------
+// Set the brush thickness
+//-------------------------------------------------
 void ImpressionistUI::setThickness(int line_thickness) {
 	thickness = line_thickness;
 
 	if (line_thickness <= 40)
 		m_ThicknessSlider->value(thickness);
 }
-// Get the Angle
+
+//-------------------------------------------------
+// Get the brush angle
+//-------------------------------------------------
 int ImpressionistUI::getAngle() {
 	return angle;
 }
-// Set the Angle
+
+//-------------------------------------------------
+// Set the brush angle
+//-------------------------------------------------
 void ImpressionistUI::setAngle(int line_angle) {
 	angle = line_angle;
 
 	if (line_angle <= 359)
 		m_AngleSlider->value(angle);
+}
+
+//-------------------------------------------------
+// Get the alpha value
+//-------------------------------------------------
+float ImpressionistUI::getAlpha() {
+	return alpha;
+}
+
+//-------------------------------------------------
+// Set the alpha value
+//-------------------------------------------------
+void ImpressionistUI::setAlpha(float alpha_value) {
+	alpha = alpha_value;
+
+	if (alpha_value <= 1.0f) {
+		m_AlphaSlider->value(alpha);
+	}
 }
 
 // Main menu definition
@@ -444,7 +477,7 @@ ImpressionistUI::ImpressionistUI() {
 	m_nSize = 10;
 	thickness = 1;
 	angle = 0;
-	alpha_value = 1;
+	alpha = 1.0f;
 	// brush dialog definition
 	m_brushDialog = new Fl_Window(400, 325, "Brush Dialog");
 		// Add a brush type choice to the dialog
@@ -503,7 +536,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_AlphaSlider->minimum(0.00);
 		m_AlphaSlider->maximum(1.00);
 		m_AlphaSlider->step(0.01);
-		m_AlphaSlider->value(alpha_value);
+		m_AlphaSlider->value(alpha);
 		m_AlphaSlider->align(FL_ALIGN_RIGHT);
 		m_AlphaSlider->callback(cb_alphaSlides);
 

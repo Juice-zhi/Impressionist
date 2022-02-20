@@ -59,6 +59,8 @@ public:
 	void				setThickness(int line_thickness);
 	int					getAngle();
 	void				setAngle(int line_angle);
+	float				getAlpha();
+	void				setAlpha(float alpha_value);
 
 private:
 	ImpressionistDoc*	m_pDoc;		// pointer to document to communicate with the document
@@ -67,7 +69,7 @@ private:
 	int		m_nSize;
 	int		thickness;
 	int		angle;
-	int     alpha_value;
+	float   alpha;
 	// Static class members
 	static Fl_Menu_Item		menuitems[];
 	static Fl_Menu_Item		brushTypeMenu[NUM_BRUSH_TYPE+1];
