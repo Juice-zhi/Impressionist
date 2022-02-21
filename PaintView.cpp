@@ -108,6 +108,9 @@ void PaintView::draw()
 			m_pDoc->m_pCurrentBrush->BrushBegin( source, target );
 			break;
 		case LEFT_MOUSE_DRAG:
+			if (m_pDoc->getAlpha() == 0) {
+				break;
+			}
 			m_pDoc->m_pCurrentBrush->BrushMove( source, target );
 			break;
 		case LEFT_MOUSE_UP:

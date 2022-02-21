@@ -8,7 +8,7 @@
 #include "impressionistDoc.h"
 #include "impressionistUI.h"
 #include "CircleBrush.h"
-#include<cmath>
+#include <cmath>
 
 extern float frand();
 

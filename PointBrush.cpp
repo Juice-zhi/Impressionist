@@ -25,9 +25,9 @@ void PointBrush::BrushBegin( const Point source, const Point target )
 	int size = pDoc->getSize();
 
 
-	glPointSize( (float)size );
+	glPointSize((float)size);
 
-	BrushMove( source, target );
+	BrushMove(source, target);
 }
 
 void PointBrush::BrushMove( const Point source, const Point target )
@@ -36,7 +36,7 @@ void PointBrush::BrushMove( const Point source, const Point target )
 	ImpressionistUI* dlg = pDoc->m_pUI;
 
 	if ( pDoc == NULL ) {
-		printf( "PointBrush::BrushMove  document is NULL\n" );
+		printf("PointBrush::BrushMove  document is NULL\n");
 		return;
 	}
 

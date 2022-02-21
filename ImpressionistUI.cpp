@@ -274,7 +274,7 @@ void ImpressionistUI::cb_directionChoice(Fl_Widget* o, void* v)
 //------------------------------------------------------------
 void ImpressionistUI::cb_clear_canvas_button(Fl_Widget* o, void* v)
 {
-	ImpressionistDoc * pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
+	ImpressionistDoc* pDoc = ((ImpressionistUI*)(o->user_data()))->getDocument();
 
 	pDoc->clearCanvas();
 }
@@ -287,7 +287,7 @@ void ImpressionistUI::cb_clear_canvas_button(Fl_Widget* o, void* v)
 //-----------------------------------------------------------
 void ImpressionistUI::cb_sizeSlides(Fl_Widget* o, void* v)
 {
-	((ImpressionistUI*)(o->user_data()))->m_nSize=int( ((Fl_Slider *)o)->value() ) ;
+	((ImpressionistUI*)(o->user_data()))->m_nSize = int(((Fl_Slider*)o)->value());
 }
 
 //--------------------------------------------------------
@@ -424,16 +424,15 @@ void ImpressionistUI::setAlpha(float alpha_value) {
 
 // Main menu definition
 Fl_Menu_Item ImpressionistUI::menuitems[] = {
-	{ "&File",		0, 0, 0, FL_SUBMENU },
+		{ "&File",		0, 0, 0, FL_SUBMENU },
 		{ "&Load Image...",	FL_ALT + 'l', (Fl_Callback *)ImpressionistUI::cb_load_image },
 		{ "&Save Image...",	FL_ALT + 's', (Fl_Callback *)ImpressionistUI::cb_save_image },
 		{ "&Brushes...",	FL_ALT + 'b', (Fl_Callback *)ImpressionistUI::cb_brushes }, 
 		{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
-		
 		{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
 		{ 0 },
-
-	{ "&Help",		0, 0, 0, FL_SUBMENU },
+		
+		{ "&Help",		0, 0, 0, FL_SUBMENU },
 		{ "&About",	FL_ALT + 'a', (Fl_Callback *)ImpressionistUI::cb_about },
 		{ 0 },
 
@@ -448,6 +447,7 @@ Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
   {"Scattered Points",	FL_ALT+'q', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_POINTS},
   {"Scattered Lines",	FL_ALT+'m', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_LINES},
   {"Scattered Circles",	FL_ALT+'d', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_CIRCLES},
+  {"Star",	            FL_ALT+'r', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_STAR},
   {0}
 };
 //Direction choice menu definition
@@ -513,7 +513,6 @@ ImpressionistUI::ImpressionistUI() {
 		m_ClearCanvasButton->user_data((void*)(this));
 		m_ClearCanvasButton->callback(cb_clear_canvas_button);
 
-
 		// Add brush size slider to the dialog 
 		m_BrushSizeSlider = new Fl_Value_Slider(10, 80, 300, 20, "Size");
 		m_BrushSizeSlider->user_data((void*)(this));	// record self to be used by static callback functions
@@ -526,6 +525,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushSizeSlider->value(m_nSize);
 		m_BrushSizeSlider->align(FL_ALIGN_RIGHT);
 		m_BrushSizeSlider->callback(cb_sizeSlides);
+
 		// Add thickness slider
 		m_ThicknessSlider = new Fl_Value_Slider(10, 110, 300, 20, "Line Width");
 		m_ThicknessSlider->user_data((void*)(this));	// record self to be used by static callback functions
@@ -538,6 +538,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_ThicknessSlider->value(thickness);
 		m_ThicknessSlider->align(FL_ALIGN_RIGHT);
 		m_ThicknessSlider->callback(cb_thicknessSlides);
+
 		// Add angle slider
 		m_AngleSlider = new Fl_Value_Slider(10, 140, 300, 20, "Line Angle");
 		m_AngleSlider->user_data((void*)(this));	// record self to be used by static callback functions
@@ -550,6 +551,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_AngleSlider->value(angle);
 		m_AngleSlider->align(FL_ALIGN_RIGHT);
 		m_AngleSlider->callback(cb_angleSlides);
+
 		//Add alpha value slider
 		m_AlphaSlider = new Fl_Value_Slider(10, 170, 300, 20, "Alpha");
 		m_AlphaSlider->user_data((void*)(this));	// record self to be used by static callback functions
