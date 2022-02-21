@@ -9,6 +9,7 @@
 #include "ScatteredLineBrush.h"
 #include <math.h>
 #include <time.h>
+#include <cmath>
 
 
 extern float frand();
@@ -51,19 +52,36 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 	int currentY = size;
 	//size = int(size * 1.5);
 	glBegin(GL_LINES);
+		StartX = target.x;
+		StartY = target.y;
 		for (int i = 0; i < num; ++i) {
-			int pos1 = rand() % (min(size / 3 , 5));
+			int pos1 = rand() % (min(size / 3, 5));
 			int pos2 = rand() % (size - pos1 - size * 2 / 3) + pos1 + size * 2 / 3;
 			currentY -= rand() % (currentY - num + i) + 1;
 			SetColor(Point(source.x + (pos1 + pos2) / 2 - size / 2, source.y + currentY), Point(target.x + (pos1 + pos2) / 2 - size / 2, target.y + currentY));
-			glVertex2d(target.x - (size / 2)* cos(angle * M_PI / 180)+pos2, target.y -(size/2)* sin(angle * M_PI / 180)+currentY);
-			glVertex2d(target.x + (size / 2)* cos(angle * M_PI / 180)+pos2, target.y +(size/2)* sin(angle * M_PI / 180)+currentY);
+			if (pDoc->get_Direction_Choice() == 0) {
+				glVertex2d(target.x - (size / 2) * cos(angle * M_PI / 180) + pos2, target.y - (size / 2) * sin(angle * M_PI / 180) + currentY);
+				glVertex2d(target.x + (size / 2) * cos(angle * M_PI / 180) + pos2, target.y + (size / 2) * sin(angle * M_PI / 180) + currentY);
+				EndX = target.x;
+				EndY = target.y;
+			}
+			else if (pDoc->get_Direction_Choice() == 1) {
+
+			}
+			else {
+				double distance = sqrt((EndX - StartX) * (EndX - StartX) + (EndY - StartY) * (EndY - StartY));
+				glVertex2d(target.x - (size / 2) * (EndX - StartX) / distance + pos2, target.y - (size / 2) * (EndY - StartY) / distance + currentY);
+				glVertex2d(target.x + (size / 2) * (EndX - StartX) / distance + pos2, target.y + (size / 2) * (EndY - StartY) / distance + currentY);
+				EndX = target.x;
+				EndY = target.y;
+			}
 		}
 	glEnd();
 }
 
 void ScatteredLineBrush::BrushEnd(const Point source, const Point target)
 {
-	// do nothing so far
+	EndX = target.x;
+	EndY = target.y;
 }
 
