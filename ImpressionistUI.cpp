@@ -265,7 +265,7 @@ void ImpressionistUI::cb_directionChoice(Fl_Widget* o, void* v)
 
 	int type = (int)v;
 
-	//pDoc->setdirectionType(type);
+	pDoc->change_Direction(type);
 }
 
 //------------------------------------------------------------

@@ -33,8 +33,10 @@ public:
 	void	setAngle(int line_angle);
 	float	getAlpha();
 	void	setAlpha(float alpha_value);
-	char*	getImageName();					// get the current image name
-	
+	char*	getImageName();		// get the current image name
+	void    change_Direction(int direction);
+	int		get_Direction_Choice();
+
 	void deactivate_thickness_slider();
 	void deactivate_angle_slider();
 	void activate_thickness_slider();
@@ -57,7 +59,8 @@ public:
 	ImpBrush*			m_pCurrentBrush;	
 	// Size of the brush.
 	int m_nSize;							
-
+	//direction choice
+	int direction_choice = 0;
 	ImpressionistUI*	m_pUI;
 
 // Operations

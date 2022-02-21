@@ -91,6 +91,17 @@ void ImpressionistDoc::setBrushType(int type)
 		m_pUI->activate_angle_slider();
 	}
 }
+void ImpressionistDoc::change_Direction(int direction)
+{
+	direction_choice = direction;
+}
+//
+//return the direction choice
+//
+int ImpressionistDoc::get_Direction_Choice()
+{
+	return direction_choice;
+}
 
 //---------------------------------------------------------
 // Returns the size of the brush.
