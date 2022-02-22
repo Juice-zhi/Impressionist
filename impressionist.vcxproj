@@ -170,6 +170,9 @@
     <ClInclude Include="ScatteredPointBrush.h" />
     <ClInclude Include="StarBrush.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Checklist" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

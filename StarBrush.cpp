@@ -49,7 +49,7 @@ void StarBrush::BrushMove(const Point source, const Point target)
 				}
 				int possibility = int(size / 6 / sqrt(j * j + i * i) * 1000);
 				if (rand() % 3000 < possibility) {
-					SetColor(Point(source.x + i, source.y + j), Point(target.x + i, target.y + j));
+					SetColor(Point(source.x + j, source.y + i), Point(target.x + i, target.y + j));
 					glVertex2d(target.x + i, target.y + j);
 				}
 			}

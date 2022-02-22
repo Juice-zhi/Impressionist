@@ -105,13 +105,14 @@ void PaintView::draw()
 		switch (eventToDo) 
 		{
 		case LEFT_MOUSE_DOWN:
-			m_pDoc->m_pCurrentBrush->BrushBegin( source, target );
+			if (target.x < m_nDrawWidth && target.y > m_nDrawHeight - m_nWindowHeight && m_pDoc->getAlpha() != 0) {
+				m_pDoc->m_pCurrentBrush->BrushBegin(source, target);
+			}
 			break;
 		case LEFT_MOUSE_DRAG:
-			if (m_pDoc->getAlpha() == 0) {
-				break;
+			if (target.x < m_nDrawWidth && target.y > m_nDrawHeight - m_nWindowHeight && m_pDoc->getAlpha() != 0) {
+				m_pDoc->m_pCurrentBrush->BrushMove(source, target);	
 			}
-			m_pDoc->m_pCurrentBrush->BrushMove( source, target );
 			break;
 		case LEFT_MOUSE_UP:
 			m_pDoc->m_pCurrentBrush->BrushEnd( source, target );

@@ -69,5 +69,4 @@ void ImpBrush::SetColor (const Point source, const Point target)
 	color[1] = sColor[1] * alpha + tColor[1] * (1 - alpha);
 	color[2] = sColor[2] * alpha + tColor[2] * (1 - alpha);
 	glColor3f(color[0], color[1], color[2]);
-
 }

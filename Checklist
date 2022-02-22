@@ -47,8 +47,8 @@ grayscale=0.299R+0.587G+0.114B
 //-----------------------------
 //Bells & Whistles
 //-----------------------------
-1W per new brush										yes/no
-1W border clipping										yes/no
+1W per new brush										yes
+1W border clipping										yes
 1W (red) marker											yes/no
 1W swap													yes/no
 1B RGB scale											yes/no
