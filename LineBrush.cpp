@@ -25,8 +25,7 @@ void LineBrush::BrushBegin(const Point source, const Point target)
 	int thickness = pDoc->getThickness();
 	int angle = pDoc->getAngle();
 
-	//StartX = target.x;
-	//StartY = target.y;
+	
 	glLineWidth((float)thickness);
 	BrushMove(source, target);
 }
@@ -58,7 +57,44 @@ void LineBrush::BrushMove(const Point source, const Point target)
 			EndY = target.y;
 		}
 		else if (pDoc->get_Direction_Choice() == 1) {
-
+			GLubyte sourceColor[3];
+			float X_Gradient = 0.0;
+			float Y_Gradient = 0.0;
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x-1,source.y+1), 3); //left up
+			//X_Gradient += 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//Y_Gradient += 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y + 1), 3);//middle up
+			//X_Gradient += 2*(0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255));
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x+1, source.y + 1), 3);//right up
+			//X_Gradient += 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//Y_Gradient -= 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x-1, source.y), 3);//left middle
+			//Y_Gradient += 2*(0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255));
+			// do nothing for middle one
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x+1, source.y), 3);//right middle
+			//Y_Gradient -= 2 * (0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255));
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x-1, source.y-1), 3);//left down
+			//X_Gradient -= 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//Y_Gradient += 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y -1), 3);//middle down
+			//X_Gradient -= 2*(0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255));
+			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x+1, source.y - 1), 3);//right down
+			//X_Gradient -= 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			//Y_Gradient -= 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
+			memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y), 3);
+			X_Gradient = X_Gradient - (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+			Y_Gradient = Y_Gradient - (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+			memcpy(sourceColor, pDoc->GetOriginalPixel(source.x+1, source.y), 3);
+			X_Gradient = X_Gradient + (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+			memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y+1), 3);
+			Y_Gradient = Y_Gradient + (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+			double absolute_change;
+			absolute_change = sqrt(X_Gradient * X_Gradient + Y_Gradient * Y_Gradient);
+			glVertex2d(target.x + ((size / 2) * Y_Gradient/absolute_change), target.y - (size / 2) * X_Gradient/absolute_change);
+			glVertex2d(target.x - ((size / 2) * Y_Gradient/absolute_change), target.y + (size / 2) * X_Gradient/absolute_change);
+			EndX = target.x;
+			EndY = target.y;
+			
 		}
 		else {
 			
