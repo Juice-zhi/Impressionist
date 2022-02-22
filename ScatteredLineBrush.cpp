@@ -66,7 +66,22 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 				EndY = target.y;
 			}
 			else if (pDoc->get_Direction_Choice() == 1) {
-
+				GLubyte sourceColor[3];
+				float X_Gradient = 0.0;
+				float Y_Gradient = 0.0;
+				memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y), 3);
+				X_Gradient = X_Gradient - (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+				Y_Gradient = Y_Gradient - (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+				memcpy(sourceColor, pDoc->GetOriginalPixel(source.x + 1, source.y), 3);
+				X_Gradient = X_Gradient + (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+				memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y + 1), 3);
+				Y_Gradient = Y_Gradient + (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
+				double absolute_change;
+				absolute_change = sqrt(X_Gradient * X_Gradient + Y_Gradient * Y_Gradient);
+				glVertex2d(target.x + ((size / 2) * Y_Gradient / absolute_change), target.y - (size / 2) * X_Gradient / absolute_change);
+				glVertex2d(target.x - ((size / 2) * Y_Gradient / absolute_change), target.y + (size / 2) * X_Gradient / absolute_change);
+				EndX = target.x;
+				EndY = target.y;
 			}
 			else {
 				double distance = sqrt((EndX - StartX) * (EndX - StartX) + (EndY - StartY) * (EndY - StartY));
