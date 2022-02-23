@@ -364,10 +364,11 @@ int ImpressionistUI::getSize()
 //-------------------------------------------------
 void ImpressionistUI::setSize( int size )
 {
+	if (size > 40)
+		size = 40;
 	m_nSize=size;
 
-	if (size<=40) 
-		m_BrushSizeSlider->value(m_nSize);
+	m_BrushSizeSlider->value(m_nSize);
 }
 
 //-------------------------------------------------

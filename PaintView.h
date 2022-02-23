@@ -32,7 +32,8 @@ public:
 
 	ImpressionistDoc *m_pDoc;
 
-	void RecordRightMousePos();
+	void StartRightMousePos();
+	void EndRightMousePos();
 
 private:
 	GLvoid* m_pPaintBitstart;

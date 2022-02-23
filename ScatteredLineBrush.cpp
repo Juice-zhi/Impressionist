@@ -60,7 +60,7 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 			currentY -= rand() % (currentY - num + i) + 1;
 			SetColor(Point(source.x + (pos1 + pos2) / 2 - size / 2, source.y + currentY), Point(target.x + (pos1 + pos2) / 2 - size / 2, target.y + currentY));
 			if (pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
-				glVertex2d(target.x - (size / 2) * cos(angle * M_PI / 180) + pos2, target.y - (size / 2) * sin(angle * M_PI / 180) + currentY);
+				glVertex2d(target.x - (size / 2) * cos(angle * M_PI / 180) + pos1, target.y - (size / 2) * sin(angle * M_PI / 180) + currentY);
 				glVertex2d(target.x + (size / 2) * cos(angle * M_PI / 180) + pos2, target.y + (size / 2) * sin(angle * M_PI / 180) + currentY);
 				EndX = target.x;
 				EndY = target.y;

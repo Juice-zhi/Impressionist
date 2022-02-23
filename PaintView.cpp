@@ -10,7 +10,7 @@
 #include "paintview.h"
 #include "ImpBrush.h"
 #include <cmath>
-
+#include <iostream>
 #define LEFT_MOUSE_DOWN		1
 #define LEFT_MOUSE_DRAG		2
 #define LEFT_MOUSE_UP		3
@@ -122,16 +122,16 @@ void PaintView::draw()
 			RestoreContent();
 			break;
 		case RIGHT_MOUSE_DOWN:
-			if (m_pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
-				RecordRightMousePos();
+			if (m_pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE && !(strcmp(m_pDoc->m_pCurrentBrush->BrushName(), "Lines") && strcmp(m_pDoc->m_pCurrentBrush->BrushName(), "Scattered Lines"))) {
+				StartRightMousePos();
 			}
 			break;
 		case RIGHT_MOUSE_DRAG:
 
 			break;
 		case RIGHT_MOUSE_UP:
-			if (m_pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
-				RecordRightMousePos();
+			if (m_pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE && !(strcmp(m_pDoc->m_pCurrentBrush->BrushName(), "Lines") && strcmp(m_pDoc->m_pCurrentBrush->BrushName(), "Scattered Lines"))) {
+				EndRightMousePos();
 			}
 			break;
 
@@ -150,19 +150,21 @@ void PaintView::draw()
 
 }
 
-void PaintView::RecordRightMousePos() {
-	if (RightStartPos.x == 0 && RightStartPos.y == 0) {
-		RightStartPos.x = coord.x;
-		RightStartPos.y = coord.y;
+void PaintView::StartRightMousePos() {
+	RightStartPos.x = coord.x;
+	RightStartPos.y = coord.y;
+}
+
+void PaintView::EndRightMousePos(){
+	int update_size = (int)sqrt((coord.x - RightStartPos.x) * (coord.x - RightStartPos.x) + (coord.y - RightStartPos.y) * (coord.y - RightStartPos.y));
+	int update_angle = int(atan2(RightStartPos.y - coord.y, coord.x - RightStartPos.x) * 180 / PI);
+	if (update_angle < 0) {
+		update_angle = 360 + update_angle;
 	}
-	else {
-		int update_size = (int)sqrt((coord.x - RightStartPos.x) * (coord.x - RightStartPos.x) + (coord.y - RightStartPos.y) * (coord.y - RightStartPos.y));
-		int update_angle = int(atan2((coord.y - RightStartPos.y) , (coord.x - RightStartPos.x)) * 180 / PI + 180);
-		m_pDoc->setSize(update_size);
-		m_pDoc->setAngle(update_angle);
-		RightStartPos.x = 0;
-		RightStartPos.y = 0;
-	}
+	m_pDoc->setSize(update_size);
+	m_pDoc->setAngle(update_angle);
+	RightStartPos.x = 0;
+	RightStartPos.y = 0;
 }
 
 int PaintView::handle(int event)
