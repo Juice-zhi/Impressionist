@@ -19,7 +19,6 @@
 #include "Impressionist.h"
 #include "OriginalView.h"
 #include "PaintView.h"
-
 #include "ImpBrush.h"
 
 class ImpressionistUI {

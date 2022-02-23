@@ -94,10 +94,12 @@ void ImpressionistDoc::setBrushType(int type)
 		m_pUI->activate_angle_slider();
 	}
 }
+
 void ImpressionistDoc::change_Direction(int direction)
 {
-	direction_choice = direction;
+	direction_choice = static_cast<Direction>(direction);
 }
+
 //
 //return the direction choice
 //
@@ -115,6 +117,13 @@ int ImpressionistDoc::getSize()
 }
 
 //---------------------------------------------------------
+// Set the size of the brush.
+//---------------------------------------------------------
+void ImpressionistDoc::setSize(int size) {
+	m_pUI->setSize(size);
+}
+
+//---------------------------------------------------------
 // Return the thickness of the brush.
 //---------------------------------------------------------
 int ImpressionistDoc::getThickness() {
@@ -126,6 +135,13 @@ int ImpressionistDoc::getThickness() {
 //---------------------------------------------------------
 int ImpressionistDoc::getAngle() {
 	return m_pUI->getAngle();
+}
+
+//---------------------------------------------------------
+//Return the Angle of the brush.
+//---------------------------------------------------------
+void ImpressionistDoc::setAngle(int line_angle) {
+	m_pUI->setAngle(line_angle);
 }
 
 //---------------------------------------------------------

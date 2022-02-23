@@ -10,6 +10,8 @@
 #include "impressionist.h"
 #include "bitmap.h"
 
+
+
 class ImpressionistUI;
 
 class ImpressionistDoc 
@@ -60,7 +62,7 @@ public:
 	// Size of the brush.
 	int m_nSize;							
 	//direction choice
-	int direction_choice = 0;
+	Direction direction_choice = SLIDER_OR_RIGHT_MOUSE;
 	ImpressionistUI*	m_pUI;
 
 // Operations

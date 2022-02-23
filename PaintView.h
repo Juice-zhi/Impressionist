@@ -32,6 +32,8 @@ public:
 
 	ImpressionistDoc *m_pDoc;
 
+	void RecordRightMousePos();
+
 private:
 	GLvoid* m_pPaintBitstart;
 	int		m_nDrawWidth,

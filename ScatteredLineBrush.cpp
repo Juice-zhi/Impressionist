@@ -59,16 +59,16 @@ void ScatteredLineBrush::BrushMove(const Point source, const Point target)
 			int pos2 = rand() % (size - pos1 - size * 2 / 3) + pos1 + size * 2 / 3;
 			currentY -= rand() % (currentY - num + i) + 1;
 			SetColor(Point(source.x + (pos1 + pos2) / 2 - size / 2, source.y + currentY), Point(target.x + (pos1 + pos2) / 2 - size / 2, target.y + currentY));
-			if (pDoc->get_Direction_Choice() == 0) {
+			if (pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
 				glVertex2d(target.x - (size / 2) * cos(angle * M_PI / 180) + pos2, target.y - (size / 2) * sin(angle * M_PI / 180) + currentY);
 				glVertex2d(target.x + (size / 2) * cos(angle * M_PI / 180) + pos2, target.y + (size / 2) * sin(angle * M_PI / 180) + currentY);
 				EndX = target.x;
 				EndY = target.y;
 			}
-			else if (pDoc->get_Direction_Choice() == 1) {
+			else if (pDoc->get_Direction_Choice() == GRADIENT) {
 				GLubyte sourceColor[3];
-				float X_Gradient = 0.0;
-				float Y_Gradient = 0.0;
+				double X_Gradient = 0.0;
+				double Y_Gradient = 0.0;
 				memcpy(sourceColor, pDoc->GetOriginalPixel(source.x, source.y), 3);
 				X_Gradient = X_Gradient - (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));
 				Y_Gradient = Y_Gradient - (0.299 * float(sourceColor[0]) + 0.587 * float(sourceColor[1]) + 0.144 * float(sourceColor[2]));

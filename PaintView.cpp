@@ -9,7 +9,7 @@
 #include "impressionistUI.h"
 #include "paintview.h"
 #include "ImpBrush.h"
-
+#include <cmath>
 
 #define LEFT_MOUSE_DOWN		1
 #define LEFT_MOUSE_DRAG		2
@@ -17,7 +17,7 @@
 #define RIGHT_MOUSE_DOWN	4
 #define RIGHT_MOUSE_DRAG	5
 #define RIGHT_MOUSE_UP		6
-
+#define PI					3.1415926
 
 #ifndef WIN32
 #define min(a, b)	( ( (a)<(b) ) ? (a) : (b) )
@@ -27,6 +27,7 @@
 static int		eventToDo;
 static int		isAnEvent=0;
 static Point	coord;
+static Point    RightStartPos(0, 0);
 
 PaintView::PaintView(int			x, 
 					 int			y, 
@@ -121,13 +122,17 @@ void PaintView::draw()
 			RestoreContent();
 			break;
 		case RIGHT_MOUSE_DOWN:
-
+			if (m_pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
+				RecordRightMousePos();
+			}
 			break;
 		case RIGHT_MOUSE_DRAG:
 
 			break;
 		case RIGHT_MOUSE_UP:
-
+			if (m_pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
+				RecordRightMousePos();
+			}
 			break;
 
 		default:
@@ -145,6 +150,20 @@ void PaintView::draw()
 
 }
 
+void PaintView::RecordRightMousePos() {
+	if (RightStartPos.x == 0 && RightStartPos.y == 0) {
+		RightStartPos.x = coord.x;
+		RightStartPos.y = coord.y;
+	}
+	else {
+		int update_size = (int)sqrt((coord.x - RightStartPos.x) * (coord.x - RightStartPos.x) + (coord.y - RightStartPos.y) * (coord.y - RightStartPos.y));
+		int update_angle = int(atan2((coord.y - RightStartPos.y) , (coord.x - RightStartPos.x)) * 180 / PI + 180);
+		m_pDoc->setSize(update_size);
+		m_pDoc->setAngle(update_angle);
+		RightStartPos.x = 0;
+		RightStartPos.y = 0;
+	}
+}
 
 int PaintView::handle(int event)
 {

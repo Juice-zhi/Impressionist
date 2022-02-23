@@ -4,7 +4,7 @@
 // The implementation of Line Brush. It is a kind of ImpBrush. All your brush implementations
 // will look like the file with the different GL primitive calls.
 //
-#include<iostream>
+#include <iostream>
 #include "impressionistDoc.h"
 #include "impressionistUI.h"
 #include "LineBrush.h"
@@ -49,17 +49,17 @@ void LineBrush::BrushMove(const Point source, const Point target)
 		StartX = target.x;
 		StartY = target.y;
 		
-		if (pDoc->get_Direction_Choice() == 0) {
+		if (pDoc->get_Direction_Choice() == SLIDER_OR_RIGHT_MOUSE) {
 			
 			glVertex2d(target.x - ((size / 2) * cos(angle * M_PI / 180)), target.y - (size / 2) * sin(angle * M_PI / 180));
 			glVertex2d(target.x + ((size / 2) * cos(angle * M_PI / 180)), target.y + (size / 2) * sin(angle * M_PI / 180));
 			EndX = target.x;
 			EndY = target.y;
 		}
-		else if (pDoc->get_Direction_Choice() == 1) {
+		else if (pDoc->get_Direction_Choice() == GRADIENT) {
 			GLubyte sourceColor[3];
-			float X_Gradient = 0.0;
-			float Y_Gradient = 0.0;
+			double X_Gradient = 0.0;
+			double Y_Gradient = 0.0;
 			//memcpy(sourceColor, pDoc->GetOriginalPixel(source.x-1,source.y+1), 3); //left up
 			//X_Gradient += 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
 			//Y_Gradient += 0.299 * float(sourceColor[0] / 255) + 0.587 * float(sourceColor[1] / 255) + 0.144 * float(sourceColor[2] / 255);
